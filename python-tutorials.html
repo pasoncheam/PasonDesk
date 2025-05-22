@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Tutorials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // You can add custom colors here if needed
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 shadow-md fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-extrabold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300">
+                        PasonDesk
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Home</a>
+                    <a href="tutorials.html" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Tutorials</a>
+                    <a href="support.html" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Support Me</a>
+                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700">
+                        <svg class="w-5 h-5 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Python Tutorials Section -->
+    <section class="pt-24 pb-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-center mb-8">
+                <img src="python-logo.png" alt="Python Logo" class="w-16 h-16 mr-4">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Python Tutorials</h2>
+            </div>
+
+            <!-- Tutorial Categories -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Beginner Section -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Beginner Level</h3>
+                    <div class="space-y-6">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <video class="w-full h-48 rounded-lg" controls poster="thumbnails/python-basics.jpg">
+                                <source src="videos/python-basics.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <h4 class="text-lg font-medium text-gray-900 dark:text-white">Python Basics</h4>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Learn the fundamentals of Python programming, including variables, data types, and basic operations.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Intermediate Section -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Intermediate Level</h3>
+                    <div class="space-y-6">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <video class="w-full h-48 rounded-lg" controls poster="thumbnails/python-oop.jpg">
+                                <source src="videos/python-oop.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <h4 class="text-lg font-medium text-gray-900 dark:text-white">Object-Oriented Programming</h4>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Master classes, objects, and inheritance in Python with practical examples.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Advanced Section -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Advanced Level</h3>
+                    <div class="space-y-6">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <video class="w-full h-48 rounded-lg" controls poster="thumbnails/python-advanced.jpg">
+                                <source src="videos/python-advanced.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <h4 class="text-lg font-medium text-gray-900 dark:text-white">Advanced Python Concepts</h4>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Explore decorators, generators, and advanced Python features.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Projects Section -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Practical Projects</h3>
+                    <div class="space-y-6">
+                        <div class="aspect-w-16 aspect-h-9">
+                            <video class="w-full h-48 rounded-lg" controls poster="thumbnails/python-projects.jpg">
+                                <source src="videos/python-projects.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <h4 class="text-lg font-medium text-gray-900 dark:text-white">Build Real Applications</h4>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Apply your Python knowledge by building real-world applications and projects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <p>&copy; 2025 PasonDesk. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
