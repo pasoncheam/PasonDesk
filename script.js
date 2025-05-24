@@ -33,27 +33,4 @@ function updateThemeIcon(isDark) {
         </svg>`;
 }
 
-// Mobile menu functionality
-const navLinks = document.querySelector('.flex.items-center.space-x-4');
-const menuButton = document.createElement('button');
-menuButton.className = 'md:hidden p-2 rounded-lg bg-gray-200 dark:bg-gray-700';
-menuButton.innerHTML = `
-    <svg class="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-    </svg>
-`;
-
-// Insert menu button before nav links
-navLinks.parentNode.insertBefore(menuButton, navLinks);
-
-// Toggle mobile menu
-menuButton.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!navLinks.contains(e.target) && !menuButton.contains(e.target)) {
-        navLinks.classList.remove('active');
-    }
-}); 
+ 
