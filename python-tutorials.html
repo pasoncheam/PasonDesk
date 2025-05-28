@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Tutorials</title>
+    <title>Python Tutorials - PasonDesk</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon2.png">
+    <link rel="shortcut icon" type="image/png" href="favicon2.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -18,6 +21,79 @@
         }
     </script>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Mind Map Styles */
+        .mind-map-node {
+            transition: all 0.3s ease;
+        }
+        .mind-map-node:hover {
+            transform: scale(1.05);
+        }
+        .mind-map-branch {
+            transition: all 0.3s ease;
+        }
+        .mind-map-branch.collapsed {
+            display: none;
+        }
+        .view-toggle {
+            transition: all 0.3s ease;
+        }
+        .view-toggle.active {
+            background-color: #3B82F6;
+            color: white;
+        }
+        /* Aesthetic Info Icon Styles */
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3B82F6 60%, #60A5FA 100%);
+            box-shadow: 0 2px 8px 0 rgba(59,130,246,0.10);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid #fff;
+            position: relative;
+        }
+        .info-icon svg {
+            width: 20px;
+            height: 20px;
+            color: #fff;
+        }
+        .info-icon:hover, .info-icon:focus {
+            transform: scale(1.12);
+            box-shadow: 0 4px 16px 0 rgba(59,130,246,0.18);
+            outline: none;
+        }
+        .dark .info-icon {
+            border: 2px solid #1e293b;
+        }
+        /* Tooltip mobile-friendly */
+        .info-tooltip {
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            top: 44px !important;
+            min-width: 200px;
+            max-width: 90vw;
+            word-break: break-word;
+        }
+        @media (max-width: 640px) {
+            .toggle-btns-mobile {
+                flex-direction: column !important;
+                gap: 0.5rem !important;
+                align-items: stretch !important;
+            }
+            .view-toggle {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .info-tooltip {
+                min-width: 160px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
     <!-- Navigation -->
@@ -73,77 +149,218 @@
     <!-- Python Tutorials Section -->
     <section class="pt-24 pb-12 px-4">
         <div class="max-w-7xl mx-auto">
-            <div class="flex items-center justify-center mb-8">
+            <div class="flex items-center justify-between mb-8">
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Python Tutorials</h2>
+                <!-- View Toggle Buttons -->
+                <div class="flex sm:flex-row toggle-btns-mobile flex-col space-x-0 sm:space-x-2 space-y-2 sm:space-y-0 mb-4 sm:mb-0">
+                    <button id="basicViewBtn" class="view-toggle active px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 relative flex items-center">
+                        Basic View
+                        <!-- Info Icon with Tooltip -->
+                        <span class="inline-block align-middle ml-2 relative group">
+                            <span class="info-icon" tabindex="0">
+                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <circle cx="10" cy="10" r="9" fill="currentColor" opacity=".18"/>
+                                    <path d="M10 6.5a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5zm-1 3.25c0-.41.34-.75.75-.75h.5c.41 0 .75.34.75.75v4c0 .41-.34.75-.75.75h-.5a.75.75 0 01-.75-.75v-4z" fill="#fff"/>
+                                </svg>
+                            </span>
+                            <span class="info-tooltip opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto group-focus:pointer-events-auto absolute left-1/2 -translate-x-1/2 top-8 z-50 w-64 p-3 rounded-lg shadow-lg bg-gray-800 text-white text-sm text-center select-none">
+                                This view displays a simple list of tutorial videos with titles and descriptions for easy browsing.
+                            </span>
+                        </span>
+                    </button>
+                    <button id="mindMapViewBtn" class="view-toggle px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 relative flex items-center">
+                        Mind Map View
+                        <!-- Info Icon with Tooltip -->
+                        <span class="inline-block align-middle ml-2 relative group">
+                            <span class="info-icon" tabindex="0">
+                                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <circle cx="10" cy="10" r="9" fill="currentColor" opacity=".18"/>
+                                    <path d="M10 6.5a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5zm-1 3.25c0-.41.34-.75.75-.75h.5c.41 0 .75.34.75.75v4c0 .41-.34.75-.75.75h-.5a.75.75 0 01-.75-.75v-4z" fill="#fff"/>
+                                </svg>
+                            </span>
+                            <span class="info-tooltip opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto group-focus:pointer-events-auto absolute left-1/2 -translate-x-1/2 top-8 z-50 w-64 p-3 rounded-lg shadow-lg bg-gray-800 text-white text-sm text-center select-none">
+                                This view shows the relationships between tutorials and their key points in a visual map. You can see how tutorials branch out and connect to important concepts or examples.
+                            </span>
+                        </span>
+                    </button>
+                </div>
             </div>
 
-            <!-- Tutorial Categories -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Basic View -->
+            <div id="basicView" class="grid grid-cols-1 gap-8">
                 <!-- Beginner Section -->
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Beginner Level</h3>
-                    <div class="space-y-6">
-                        <div class="aspect-w-16 aspect-h-9">
-                            <video class="w-full h-48 rounded-lg" controls poster="thumbnails/python-basics.jpg">
-                                <source src="videos/python-basics.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                    <div class="flex space-x-6 overflow-x-auto pb-2">
+                        <!-- Video 1 -->
+                        <div class="min-w-[260px] flex-shrink-0">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <video class="w-full h-40 rounded-lg" controls poster="thumbnails/python-basics.jpg">
+                                    <source src="videos/python-basics.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <h4 id="beginner-title-1" class="text-lg font-medium text-gray-900 dark:text-white mt-2">Python Basics</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Learn the fundamentals of Python programming, including variables, data types, and basic operations.
+                            </p>
                         </div>
-                        <h4 class="text-lg font-medium text-gray-900 dark:text-white">Python Basics</h4>
-                        <p class="text-gray-600 dark:text-gray-300">
-                            Learn the fundamentals of Python programming, including variables, data types, and basic operations.
-                        </p>
+                        <!-- Video 2 -->
+                        <div class="min-w-[260px] flex-shrink-0">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <video class="w-full h-40 rounded-lg" controls poster="thumbnails/python-variables.jpg">
+                                    <source src="videos/python-variables.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <h4 id="beginner-title-2" class="text-lg font-medium text-gray-900 dark:text-white mt-2">Variables & Data Types</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Understand Python variables, data types, and how to use them in your programs.
+                            </p>
+                        </div>
+                        <!-- Video 3 -->
+                        <div class="min-w-[260px] flex-shrink-0">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <video class="w-full h-40 rounded-lg" controls poster="thumbnails/python-input.jpg">
+                                    <source src="videos/python-input.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <h4 id="beginner-title-3" class="text-lg font-medium text-gray-900 dark:text-white mt-2">User Input & Output</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Learn how to get input from users and display output in Python.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Intermediate Section -->
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Intermediate Level</h3>
-                    <div class="space-y-6">
-                        <div class="aspect-w-16 aspect-h-9">
-                            <video class="w-full h-48 rounded-lg" controls poster="thumbnails/python-oop.jpg">
-                                <source src="videos/python-oop.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                    <div class="flex space-x-6 overflow-x-auto pb-2">
+                        <!-- Video 1 -->
+                        <div class="min-w-[260px] flex-shrink-0">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <video class="w-full h-40 rounded-lg" controls poster="thumbnails/python-oop.jpg">
+                                    <source src="videos/python-oop.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <h4 id="intermediate-title-1" class="text-lg font-medium text-gray-900 dark:text-white mt-2">Object-Oriented Programming</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Master classes, objects, and inheritance in Python with practical examples.
+                            </p>
                         </div>
-                        <h4 class="text-lg font-medium text-gray-900 dark:text-white">Object-Oriented Programming</h4>
-                        <p class="text-gray-600 dark:text-gray-300">
-                            Master classes, objects, and inheritance in Python with practical examples.
-                        </p>
+                        <!-- Video 2 -->
+                        <div class="min-w-[260px] flex-shrink-0">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <video class="w-full h-40 rounded-lg" controls poster="thumbnails/python-functions.jpg">
+                                    <source src="videos/python-functions.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <h4 id="intermediate-title-2" class="text-lg font-medium text-gray-900 dark:text-white mt-2">Functions & Modules</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Dive into defining functions, using parameters, and organizing code with modules.
+                            </p>
+                        </div>
+                        <!-- Video 3 -->
+                        <div class="min-w-[260px] flex-shrink-0">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <video class="w-full h-40 rounded-lg" controls poster="thumbnails/python-files.jpg">
+                                    <source src="videos/python-files.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <h4 id="intermediate-title-3" class="text-lg font-medium text-gray-900 dark:text-white mt-2">File Handling</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Learn how to read from and write to files in Python.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Advanced Section -->
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Advanced Level</h3>
-                    <div class="space-y-6">
-                        <div class="aspect-w-16 aspect-h-9">
-                            <video class="w-full h-48 rounded-lg" controls poster="thumbnails/python-advanced.jpg">
-                                <source src="videos/python-advanced.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                    <div class="flex space-x-6 overflow-x-auto pb-2">
+                        <!-- Video 1 -->
+                        <div class="min-w-[260px] flex-shrink-0">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <video class="w-full h-40 rounded-lg" controls poster="thumbnails/python-advanced.jpg">
+                                    <source src="videos/python-advanced.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <h4 id="advanced-title-1" class="text-lg font-medium text-gray-900 dark:text-white mt-2">Advanced Python Concepts</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Explore decorators, generators, and advanced Python features.
+                            </p>
                         </div>
-                        <h4 class="text-lg font-medium text-gray-900 dark:text-white">Advanced Python Concepts</h4>
-                        <p class="text-gray-600 dark:text-gray-300">
-                            Explore decorators, generators, and advanced Python features.
-                        </p>
+                        <!-- Video 2 -->
+                        <div class="min-w-[260px] flex-shrink-0">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <video class="w-full h-40 rounded-lg" controls poster="thumbnails/python-exceptions.jpg">
+                                    <source src="videos/python-exceptions.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <h4 id="advanced-title-2" class="text-lg font-medium text-gray-900 dark:text-white mt-2">Error Handling & Exceptions</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Learn how to handle errors and exceptions gracefully in Python.
+                            </p>
+                        </div>
+                        <!-- Video 3 -->
+                        <div class="min-w-[260px] flex-shrink-0">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <video class="w-full h-40 rounded-lg" controls poster="thumbnails/python-iterators.jpg">
+                                    <source src="videos/python-iterators.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <h4 id="advanced-title-3" class="text-lg font-medium text-gray-900 dark:text-white mt-2">Iterators & Generators</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Understand iterators and generators for efficient looping and data processing.
+                            </p>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Projects Section -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Practical Projects</h3>
-                    <div class="space-y-6">
-                        <div class="aspect-w-16 aspect-h-9">
-                            <video class="w-full h-48 rounded-lg" controls poster="thumbnails/python-projects.jpg">
-                                <source src="videos/python-projects.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                        <h4 class="text-lg font-medium text-gray-900 dark:text-white">Build Real Applications</h4>
-                        <p class="text-gray-600 dark:text-gray-300">
-                            Apply your Python knowledge by building real-world applications and projects.
-                        </p>
+            <!-- Mind Map View -->
+            <div id="mindMapView" class="hidden">
+                <div class="overflow-x-auto py-8">
+                    <div class="relative min-w-[900px] h-[400px] flex items-center justify-center">
+                        <!-- SVG lines for connections -->
+                        <svg class="absolute top-0 left-0 w-full h-full pointer-events-none" width="900" height="400">
+                            <!-- Tutorial 1 to Tutorial 2 -->
+                            <line x1="200" y1="200" x2="400" y2="120" stroke="#888" stroke-width="2" />
+                            <!-- Tutorial 1 to Tutorial 3 -->
+                            <line x1="200" y1="200" x2="400" y2="280" stroke="#888" stroke-width="2" />
+                            <!-- Tutorial 2 to Key Point A -->
+                            <line x1="600" y1="80" x2="500" y2="120" stroke="#888" stroke-width="2" />
+                            <!-- Tutorial 2 to Key Point B -->
+                            <line x1="600" y1="160" x2="500" y2="120" stroke="#888" stroke-width="2" />
+                            <!-- Tutorial 3 to Example 1 -->
+                            <line x1="500" y1="280" x2="600" y2="280" stroke="#888" stroke-width="2" />
+                            <!-- Example 1 to Sub-example -->
+                            <line x1="700" y1="280" x2="600" y2="280" stroke="#888" stroke-width="2" />
+                        </svg>
+                        <!-- Nodes -->
+                        <!-- Tutorial 1 (root) -->
+                        <div id="mindmap-tut1" class="absolute left-[120px] top-[180px] w-[120px] h-[60px] flex items-center justify-center bg-blue-100 dark:bg-blue-900 rounded-lg shadow font-semibold text-blue-900 dark:text-blue-200">Tutorial 1</div>
+                        <!-- Tutorial 2 -->
+                        <div id="mindmap-tut2" class="absolute left-[400px] top-[100px] w-[120px] h-[60px] flex items-center justify-center bg-green-100 dark:bg-green-900 rounded-lg shadow font-semibold text-green-900 dark:text-green-200">Tutorial 2</div>
+                        <!-- Tutorial 3 -->
+                        <div id="mindmap-tut3" class="absolute left-[400px] top-[260px] w-[120px] h-[60px] flex items-center justify-center bg-purple-100 dark:bg-purple-900 rounded-lg shadow font-semibold text-purple-900 dark:text-purple-200">Tutorial 3</div>
+                        <!-- Key Point A -->
+                        <div class="absolute left-[600px] top-[60px] w-[100px] h-[50px] flex items-center justify-center bg-yellow-100 dark:bg-yellow-900 rounded-lg shadow text-yellow-900 dark:text-yellow-200">Key Point A</div>
+                        <!-- Key Point B -->
+                        <div class="absolute left-[600px] top-[140px] w-[100px] h-[50px] flex items-center justify-center bg-yellow-100 dark:bg-yellow-900 rounded-lg shadow text-yellow-900 dark:text-yellow-200">Key Point B</div>
+                        <!-- Example 1 -->
+                        <div class="absolute left-[600px] top-[260px] w-[100px] h-[50px] flex items-center justify-center bg-pink-100 dark:bg-pink-900 rounded-lg shadow text-pink-900 dark:text-pink-200">Example 1</div>
+                        <!-- Sub-example -->
+                        <div class="absolute left-[700px] top-[260px] w-[100px] h-[50px] flex items-center justify-center bg-pink-200 dark:bg-pink-800 rounded-lg shadow text-pink-900 dark:text-pink-100">Sub-example</div>
                     </div>
                 </div>
             </div>
@@ -158,8 +375,57 @@
     </footer>
 
     <script src="script.js"></script>
-    <script src="cursor.js"></script>
     <script>
+        // View Toggle Functionality
+        const basicViewBtn = document.getElementById('basicViewBtn');
+        const mindMapViewBtn = document.getElementById('mindMapViewBtn');
+        const basicView = document.getElementById('basicView');
+        const mindMapView = document.getElementById('mindMapView');
+
+        function switchView(view) {
+            if (view === 'basic') {
+                basicView.classList.remove('hidden');
+                mindMapView.classList.add('hidden');
+                basicViewBtn.classList.add('active');
+                mindMapViewBtn.classList.remove('active');
+            } else {
+                basicView.classList.add('hidden');
+                mindMapView.classList.remove('hidden');
+                basicViewBtn.classList.remove('active');
+                mindMapViewBtn.classList.add('active');
+            }
+        }
+
+        basicViewBtn.addEventListener('click', () => switchView('basic'));
+        mindMapViewBtn.addEventListener('click', () => switchView('mindmap'));
+
+        // Mind Map Branch Toggle
+        document.querySelectorAll('.toggle-branch').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const branch = e.target.closest('.mind-map-node').querySelector('.mind-map-branch');
+                const isCollapsed = branch.classList.contains('collapsed');
+                
+                branch.classList.toggle('collapsed');
+                e.target.textContent = isCollapsed ? 'Collapse' : 'Expand';
+            });
+        });
+
+        // Sync Mind Map node names with Basic View tutorial titles
+        function syncMindMapTitles() {
+            // Beginner 1 -> Mindmap root
+            const tut1 = document.getElementById('beginner-title-1');
+            const tut2 = document.getElementById('beginner-title-2');
+            const tut3 = document.getElementById('beginner-title-3');
+            const mm1 = document.getElementById('mindmap-tut1');
+            const mm2 = document.getElementById('mindmap-tut2');
+            const mm3 = document.getElementById('mindmap-tut3');
+            if (tut1 && mm1) mm1.textContent = tut1.textContent;
+            if (tut2 && mm2) mm2.textContent = tut2.textContent;
+            if (tut3 && mm3) mm3.textContent = tut3.textContent;
+        }
+        document.addEventListener('DOMContentLoaded', syncMindMapTitles);
+        mindMapViewBtn.addEventListener('click', syncMindMapTitles);
+
         // Mobile menu functionality
         const mobileMenuButton = document.getElementById('mobileMenuButton');
         const mobileMenu = document.getElementById('mobileMenu');
