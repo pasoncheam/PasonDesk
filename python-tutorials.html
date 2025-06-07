@@ -615,6 +615,7 @@
                         <div class="mb-4 w-full max-w-lg flex items-center space-x-2">
                             <input type="text" id="nodeSearchInput" placeholder="Search for a topic..." class="flex-grow px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <button id="nodeSearchButton" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Search</button>
+                            <button id="clearSearchButton" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500">Clear</button>
                         </div>
                         <div class="mb-6 max-w-2xl text-center text-base text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 rounded-lg p-4 shadow">
                             <b>How to use this Mind Map View:</b><br>
@@ -846,10 +847,34 @@
                 // Search functionality
                 const nodeSearchInput = document.getElementById('nodeSearchInput');
                 const nodeSearchButton = document.getElementById('nodeSearchButton');
+                const clearSearchButton = document.getElementById('clearSearchButton');
+
+                function resetNodes() {
+                    const allNodes = data.nodes.get();
+                    const updatedNodes = allNodes.map(node => {
+                        const originalColor = beginner.has(node.label) ? '#22c55e' :
+                                            intermediate.has(node.label) ? '#facc15' :
+                                            advanced.has(node.label) ? '#ef4444' : '#7ecbff';
+                        
+                        return {
+                            id: node.id,
+                            color: {
+                                background: originalColor,
+                                border: originalColor,
+                                highlight: { background: originalColor, border: originalColor }
+                            },
+                            font: { color: '#222' },
+                            borderWidth: 2,
+                            shadow: false
+                        };
+                    });
+                    data.nodes.update(updatedNodes);
+                    nodeSearchInput.value = ''; // Clear the search input
+                }
 
                 nodeSearchButton.addEventListener('click', () => {
                     const query = nodeSearchInput.value.toLowerCase();
-                    const allNodes = data.nodes.get(); // Get all nodes
+                    const allNodes = data.nodes.get();
                     const updatedNodes = [];
 
                     allNodes.forEach(node => {
@@ -862,15 +887,15 @@
                             updatedNodes.push({
                                 id: node.id,
                                 color: {
-                                    background: '#FFD700', // Gold color for highlight
-                                    border: '#FFA500',   // Orange border
-                                    highlight: { background: '#FFD700', border: '#FFA500' }
+                                    background: '#9333EA',
+                                    border: '#7E22CE',
+                                    highlight: { background: '#9333EA', border: '#7E22CE' }
                                 },
-                                font: { color: '#333' }, // Darker font for contrast
-                                borderWidth: 5, // Thicker border for glow
+                                font: { color: '#fff' },
+                                borderWidth: 5,
                                 shadow: {
                                     enabled: true,
-                                    color: 'rgba(255, 215, 0, 0.8)', // Gold shadow for glow
+                                    color: 'rgba(147, 51, 234, 0.8)',
                                     size: 20,
                                     x: 0,
                                     y: 0
@@ -887,12 +912,14 @@
                                 },
                                 font: { color: '#222' },
                                 borderWidth: 2,
-                                shadow: false // Remove shadow
+                                shadow: false
                             });
                         }
                     });
                     data.nodes.update(updatedNodes);
                 });
+
+                clearSearchButton.addEventListener('click', resetNodes);
 
                 // Modal logic
                 network.on('click', function(params) {
